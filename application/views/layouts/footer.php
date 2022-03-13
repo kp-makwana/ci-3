@@ -1,2 +1,3 @@
-<?php
-	echo "<br>" . "this is footer page";
+<!--<p>Copyright 2022</p>-->
+</body>
+</html>
