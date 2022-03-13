@@ -20,6 +20,17 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
+		$this->session->set_userdata('email','kp@gmail.com');
+
+		$arr = array(
+			'id'=>1,
+			'name'=>'kiran',
+			'phone'=>9879879870
+		);
+
+		$this->session->set_userdata($arr);
+
+
 		$this->load->view('welcome_message');
 	}
 }

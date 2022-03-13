@@ -5,17 +5,20 @@ class User extends CI_Controller
 {
 	public function index()
 	{
-		$this->load->model('user');
-		$data = $this->user->index();
-		echo $data;
+		$this->load->model('usermodel');
+		$data = $this->usermodel->index();
 
 		$this->load->helper('url');
 		$data['title'] = 'user title';
 		$data['user'] = array('first','second','third');
 
+		echo "<pre>";
+		print_r($data);
+		exit();
+
 		$this->load->view('layouts/header',$data);
 		$this->load->view('layouts/menu',$data);
-		$this->load->view('User/index',$data);
+		$this->load->view('user/index',$data);
 		$this->load->view('layouts/footer',$data);
 	}
 
