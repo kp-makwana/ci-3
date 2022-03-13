@@ -20,9 +20,12 @@ class User extends CI_Controller
 		$this->load->view('layouts/footer');
 	}
 
-	public function show($id,$id2)
+	public function show($id)
 	{
-		echo "param = ".$id." - ".$id2;
+		$data['user'] = $this->usermodel->show($id);
+		$this->load->view('layouts/header');
+		$this->load->view('user/show',$data);
+		$this->load->view('layouts/footer');
 	}
 
 	public function add()
@@ -49,17 +52,31 @@ class User extends CI_Controller
 
 	public function edit($id)
 	{
-		echo $id;
-		exit();
+		$this->update($id);
+	}
+
+	public function update($id)
+	{
+		$f_name = $this->generateRandomString();
+		$l_name = $this->generateRandomString();
+
+		$userArr = array(
+			'f_name' => $f_name,
+			'l_name' => $l_name,
+		);
+		$this->usermodel->update($id,$userArr);
+		$this->session->set_flashdata('update','record update successfully.');
+		redirect('user');
 	}
 
 	public function delete($id)
 	{
-		echo $id;
-		exit();
+		$this->usermodel->delete($id);
+		$this->session->set_flashdata('delete','record has been deleted.');
+		redirect('user');
 	}
 	private function generateRandomString($length = 4) {
-		$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		$characters = 'abcdefghijklmnopqrstuvwxyz';
 		$charactersLength = strlen($characters);
 		$randomString = '';
 		for ($i = 0; $i < $length; $i++) {

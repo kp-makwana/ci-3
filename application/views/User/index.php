@@ -5,6 +5,16 @@
 			<?php echo $this->session->flashdata('success') ?>
 		</div>
 		<?php } ?>
+		<?php if ($this->session->flashdata('update')){ ?>
+		<div class="alert alert-primary" role="alert">
+			<?php echo $this->session->flashdata('update') ?>
+		</div>
+		<?php } ?>
+		<?php if ($this->session->flashdata('delete')){ ?>
+		<div class="alert alert-danger" role="alert">
+			<?php echo $this->session->flashdata('delete') ?>
+		</div>
+		<?php } ?>
 		<table class="table">
 			<thead>
 			<tr class="text-center">
@@ -22,7 +32,7 @@
 			<?php if (!empty($users)) { foreach ($users as $user){ ?>
 			<tr class="text-center">
 				<th scope="row"><?php echo $user->id ?></th>
-				<td><?php echo $user->f_name.' '.$user->l_name  ?></td>
+				<td><?php echo anchor('user/show/'.$user->id,$user->f_name.' '.$user->l_name,array('class'=>'inactive')) ?></td>
 				<td><?php echo $user->dob ?></td>
 				<td><?php echo $user->contact_no ?></td>
 				<td><?php echo $user->email ?></td>
@@ -30,6 +40,8 @@
 				<td>
 					<?php echo anchor('user/edit/'.$user->id,'Edit',array('class'=>'btn btn-primary')) ?>
 					<?php echo anchor('user/delete/'.$user->id,'Delete',array('class'=>'btn btn-danger')) ?>
+					<?php echo anchor('user/show/'.$user->id,'Detail',array('class'=>'btn btn-success')) ?>
+<!--					--><?php //echo anchor('user/show/'.$user->id,$user->f_name.' '.$user->l_name,array('class'=>'inactive')) ?>
 				</td>
 			</tr>
 			<?php }}else{ ?>
