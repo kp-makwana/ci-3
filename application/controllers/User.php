@@ -15,11 +15,7 @@ class User extends CI_Controller
 		$this->load->model('usermodel');
 		$data['users'] = $this->usermodel->index();
 
-		$this->load->helper('url');
-		$data['title'] = 'user title';
-
 		$this->load->view('layouts/header');
-		$this->load->view('layouts/menu',$data);
 		$this->load->view('user/index',$data);
 		$this->load->view('layouts/footer');
 	}
