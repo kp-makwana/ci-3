@@ -24,4 +24,57 @@ class User extends CI_Controller
 	{
 		echo "param = ".$id." - ".$id2;
 	}
+
+	public function add()
+	{
+		$f_name = $this->generateRandomString();
+		$l_name = $this->generateRandomString();
+		$dob = '2000-01-01';
+		$contact_no = $this->generateRandomNumber();
+		$email = $this->generateRandomString().'@gmail.com';
+		$username = $email;
+
+		$userArr = array(
+			'f_name' => $f_name,
+			'l_name' => $l_name,
+			'dob' => $dob,
+			'contact_no' => $contact_no,
+			'email' => $email,
+			'username' => $username,
+		);
+		$this->usermodel->add($userArr);
+		$this->session->set_flashdata('success','record insert successfully.');
+		redirect('user');
+	}
+
+	public function edit($id)
+	{
+		echo $id;
+		exit();
+	}
+
+	public function delete($id)
+	{
+		echo $id;
+		exit();
+	}
+	private function generateRandomString($length = 4) {
+		$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		$charactersLength = strlen($characters);
+		$randomString = '';
+		for ($i = 0; $i < $length; $i++) {
+			$randomString .= $characters[rand(0, $charactersLength - 1)];
+		}
+		return $randomString;
+	}
+
+	private function generateRandomNumber($length = 10) {
+		$characters = '0123456789';
+		$charactersLength = strlen($characters);
+		$randomString = '';
+		for ($i = 0; $i < $length; $i++) {
+			$randomString .= $characters[rand(0, $charactersLength - 1)];
+		}
+		return $randomString;
+	}
 }
